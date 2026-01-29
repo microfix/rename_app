@@ -215,13 +215,20 @@
     function updatePreview() {
         if (!currentFile) return;
 
-        const dateStr = dateInput.value;
+        const rawDate = dateInput.value; // Format: YYYY-MM-DD
+        let formattedDate = rawDate;
+        
+        if (rawDate) {
+            const [y, m, d] = rawDate.split('-');
+            formattedDate = `${d}-${m}-${y}`; // Dansk format: DD-MM-YYYY
+        }
+
         const category = catInput.value;
         const subject = sanitize(subInput.value);
         const detail = sanitize(detInput.value);
         const ext = currentFile.name.substring(currentFile.name.lastIndexOf('.'));
 
-        const parts = [dateStr, category];
+        const parts = [formattedDate, category];
         if (subject) parts.push(subject);
         if (detail) parts.push(detail);
 
