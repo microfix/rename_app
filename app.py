@@ -5,102 +5,135 @@ from datetime import datetime
 
 # Konfiguration af siden
 st.set_page_config(
-    page_title="FileMaster Pro | Byggesag",
+    page_title="FileMaster Pro | Dark Mode",
     page_icon="🏗️",
     layout="centered"
 )
 
-# --- PREMIUM DESIGN SYSTEM ---
+# --- MODERN DARK THEME DESIGN ---
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-    /* Stop Streamlit farve-styring og tving design */
+    /* Global Background */
     [data-testid="stAppViewContainer"] {
-        background-color: #f1f3f6;
+        background-color: #0f172a !important;
     }
     
-    * {
-        font-family: 'Inter', sans-serif;
+    [data-testid="stHeader"] {
+        background-color: rgba(0,0,0,0) !important;
     }
 
-    /* Overskrifter og tekst farver - TVUNGET */
+    * {
+        font-family: 'Inter', sans-serif;
+        color: #f8fafc !important;
+    }
+
+    /* Overskrifter */
     h1, .header-text {
-        color: #1a202c !important;
+        color: #f8fafc !important;
         font-weight: 800;
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         text-align: center;
-        margin-bottom: 5px;
-        padding-top: 20px;
+        margin-bottom: 0px;
+        padding-top: 40px;
+        letter-spacing: -1px;
     }
     
     .subheader-text {
-        color: #4a5568 !important;
+        color: #94a3b8 !important;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         font-size: 1.1rem;
+        font-weight: 400 !important;
     }
 
-    /* Container Box */
+    /* Main Container / Card */
     .st-emotion-cache-1r6slb0, .main-card {
-        background-color: white !important;
+        background-color: #1e293b !important;
         padding: 40px !important;
-        border-radius: 20px !important;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
-        color: #2d3748 !important;
+        border-radius: 24px !important;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
+        border: 1px solid rgba(255,255,255,0.05) !important;
     }
 
-    /* Labels - TVUNGET SORT/GRÅ */
-    label, p, span, .stMarkdown {
-        color: #2d3748 !important;
+    /* Input Felter styling */
+    input, select, textarea, [data-baseweb="select"] {
+        background-color: #0f172a !important;
+        color: white !important;
+        border: 1px solid #334155 !important;
+        border-radius: 10px !important;
+    }
+
+    /* Labels */
+    label, .stMarkdown p {
+        color: #cbd5e1 !important;
         font-weight: 600 !important;
+        margin-bottom: 8px !important;
     }
 
-    /* Preview Boks */
+    /* Preview Boks - DARK STYLE */
     .preview-card {
-        background-color: #f8fafc;
-        border: 2px dashed #3182ce;
-        border-radius: 12px;
-        padding: 25px;
-        margin: 25px 0;
+        background-color: #0f172a;
+        border: 2px dashed #38bdf8;
+        border-radius: 16px;
+        padding: 30px;
+        margin: 30px 0;
         text-align: center;
+        box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
     }
     
     .preview-label {
         font-size: 0.75rem !important;
-        color: #718096 !important;
+        color: #38bdf8 !important;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 8px;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        font-weight: 700 !important;
     }
     
     .preview-filename {
-        color: #2c5282 !important;
-        font-size: 1.2rem !important;
+        color: #f1f5f9 !important;
+        font-size: 1.3rem !important;
         font-weight: 700 !important;
         word-break: break-all;
+        font-family: 'Courier New', monospace;
     }
 
-    /* Knap */
+    /* Premium Button - GLOW EFFECT */
     div.stButton > button {
-        background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%) !important;
+        background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%) !important;
         color: white !important;
         border: none !important;
-        padding: 15px 30px !important;
-        border-radius: 10px !important;
-        font-weight: 600 !important;
+        padding: 18px 30px !important;
+        border-radius: 12px !important;
+        font-weight: 800 !important;
         width: 100% !important;
         text-transform: uppercase;
-    }
-
-    /* File Uploader styling */
-    [data-testid="stFileUploader"] section {
-        border: 2px dashed #3182ce !important;
-        background-color: #ebf8ff !important;
+        letter-spacing: 1px;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2) !important;
     }
     
-    [data-testid="stFileUploader"] label {
-        color: #2b6cb0 !important;
+    div.stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4) !important;
+        filter: brightness(1.1);
     }
+
+    /* File Uploader - DARK */
+    [data-testid="stFileUploader"] section {
+        border: 2px dashed #334155 !important;
+        background-color: #0f172a !important;
+        border-radius: 16px !important;
+    }
+    
+    [data-testid="stFileUploader"] div {
+        color: #94a3b8 !important;
+    }
+    
+    /* Skjul Streamlit menu for renere look */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
     </style>
 """, unsafe_allow_html=True)
 
@@ -111,12 +144,12 @@ def sanitize_filename(text):
     return re.sub(r'[\\/*?:"<>|]', "-", text)
 
 def main():
-    # Header indpakket i HTML for at undgå markdown fejl
+    # Logo / Header
     st.markdown('<h1 class="header-text">FileMaster Pro</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subheader-text">Standardiseret navngivning til dine byggesager</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subheader-text">Professionel navngivning til byggebranchen</p>', unsafe_allow_html=True)
 
     # Main UI
-    uploaded_file = st.file_uploader("Træk og slip en fil her", type=None)
+    uploaded_file = st.file_uploader("Upload din fil her", type=None)
 
     if uploaded_file:
         file_name, file_extension = os.path.splitext(uploaded_file.name)
@@ -124,19 +157,19 @@ def main():
 
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # Formular i kolonner
+        # Formular i mørke kolonner
         col1, col2 = st.columns(2)
         
         with col1:
-            selected_date = st.date_input("🗓️ Dato", value=default_date)
+            selected_date = st.date_input("🗓️ Vælg Dato", value=default_date)
             subject = st.text_input("📝 Emne (Subject)", placeholder="f.eks. SAT Protokol")
         
         with col2:
             categories = ["KONTRAKT", "DESIGN", "ADMIN", "VENT", "SCOPE", "KORRESPONDANCE"]
-            category = st.selectbox("🏷️ Kategori", options=categories)
-            detail = st.text_input("🔍 Detaljer (Detail)", placeholder="f.eks. Version 20")
+            category = st.selectbox("🏷️ Vælg Kategori", options=categories)
+            detail = st.text_input("🔍 Specifikke detaljer", placeholder="f.eks. Version 20")
 
-        # Navne-generering
+        # Navne-generering logik
         clean_subject = sanitize_filename(subject)
         clean_detail = sanitize_filename(detail)
         date_str = selected_date.strftime("%Y-%m-%d")
@@ -147,17 +180,17 @@ def main():
         
         new_filename = " - ".join(parts) + file_extension
 
-        # Preview Boks
+        # Preview Boks (Dark Mode)
         st.markdown(f"""
             <div class="preview-card">
-                <div class="preview-label">Nyt filnavn preview</div>
+                <div class="preview-label">Standardiseret filnavn</div>
                 <div class="preview-filename">{new_filename}</div>
             </div>
         """, unsafe_allow_html=True)
 
-        # Download Knap
+        # Download Knap med Glow
         st.download_button(
-            label="Omdøb og download fil",
+            label="Download omdøbt fil",
             data=uploaded_file.getvalue(),
             file_name=new_filename,
             mime=uploaded_file.type,
@@ -165,10 +198,11 @@ def main():
         )
         
     else:
-        # Tip tekst gemt hvis ingen fil er valgt
+        # Hero / Empty State
         st.markdown("""
-            <div style="text-align: center; color: #718096; padding: 40px; font-style: italic;">
-                Tip: Upload filen først for at se navne-generatoren.
+            <div style="text-align: center; border: 1px solid #334155; border-radius: 20px; padding: 60px; background-color: #1e293b;">
+                <h3 style="color: #f8fafc; font-weight: 700;">Klar til at omdøbe?</h3>
+                <p style="color: #94a3b8;">Upload en fil for at komme i gang med din byggesag.</p>
             </div>
         """, unsafe_allow_html=True)
 
