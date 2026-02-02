@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,20 +34,34 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-weight: 800; font-size: 2.2rem; margin: 0; letter-spacing: -1px; }
-        .header p { color: var(--text-dim); margin-top: 5px; }
-        .privacy-badge { 
-            display: inline-block; 
-            background: rgba(34, 197, 94, 0.1); 
-            color: #4ade80; 
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            font-size: 0.75rem; 
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            color: var(--text-dim);
+            margin-top: 5px;
+        }
+
+        .privacy-badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             margin-top: 10px;
             border: 1px solid rgba(34, 197, 94, 0.2);
         }
@@ -60,14 +75,38 @@
             transition: all 0.3s;
             margin-bottom: 20px;
         }
-        .upload-zone:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
-        .upload-zone.active { border-color: var(--accent); background: rgba(56, 189, 248, 0.1); }
-        
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .field { display: flex; flex-direction: column; }
-        .field label { font-size: 0.85rem; font-weight: 600; color: var(--text-dim); margin-bottom: 5px; }
-        
-        input, select {
+
+        .upload-zone:hover {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .upload-zone.active {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
             background: var(--bg-color);
             border: 1px solid var(--border);
             color: white;
@@ -76,7 +115,12 @@
             font-size: 0.95rem;
             outline: none;
         }
-        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
 
         .preview-box {
             background: var(--bg-color);
@@ -86,8 +130,22 @@
             margin-top: 25px;
             text-align: center;
         }
-        .preview-label { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 800; }
-        .preview-text { font-family: monospace; font-size: 1.1rem; word-break: break-all; color: var(--text-main); }
+
+        .preview-label {
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .preview-text {
+            font-family: monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            color: var(--text-main);
+        }
 
         .btn-download {
             width: 100%;
@@ -104,156 +162,234 @@
             transition: all 0.3s;
             box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
         }
-        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4); filter: brightness(1.1); }
-        .btn-download:disabled { background: #334155; cursor: not-allowed; box-shadow: none; opacity: 0.5; }
 
-        #file-info { margin-top: 10px; font-size: 0.85rem; color: var(--accent); font-weight: 600; }
-        .hidden { display: none; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="header">
-        <h1>FileMaster Pro</h1>
-        <p>Lokal filhåndtering</p>
-        <span class="privacy-badge">🔒 100% Privat - Filer sendes ALDRIG til internettet</span>
-    </div>
-
-    <div class="upload-zone" id="drop-zone">
-        <div id="drop-text">Træk din fil herover eller klik for at vælge</div>
-        <div id="file-info" class="hidden">✓ Fil valgt</div>
-        <input type="file" id="file-input" class="hidden">
-    </div>
-
-    <div id="controls" class="hidden">
-        <div class="form-grid">
-            <div class="field">
-                <label>Dato</label>
-                <input type="date" id="date-input">
-            </div>
-            <div class="field">
-                <label>Kategori</label>
-                <select id="category-input">
-                    <option value="KONTRAKT">KONTRAKT</option>
-                    <option value="DESIGN">DESIGN</option>
-                    <option value="ADMIN">ADMIN</option>
-                    <option value="VENT">VENT</option>
-                    <option value="SCOPE">SCOPE</option>
-                    <option value="KORRESPONDANCE">KORRESPONDANCE</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Emne (Subject)</label>
-                <input type="text" id="subject-input" placeholder="f.eks. SAT Protokol">
-            </div>
-            <div class="field">
-                <label>Detaljer (Detail)</label>
-                <input type="text" id="detail-input" placeholder="f.eks. Version 20">
-            </div>
-        </div>
-
-        <div class="preview-box">
-            <div class="preview-label">Nyt filnavn</div>
-            <div class="preview-text" id="preview-text">-</div>
-        </div>
-
-        <button class="btn-download" id="download-btn">Download omdøbt fil</button>
-    </div>
-</div>
-
-<script>
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input');
-    const controls = document.getElementById('controls');
-    const previewText = document.getElementById('preview-text');
-    const downloadBtn = document.getElementById('download-btn');
-    
-    const dateInput = document.getElementById('date-input');
-    const catInput = document.getElementById('category-input');
-    const subInput = document.getElementById('subject-input');
-    const detInput = document.getElementById('detail-input');
-
-    let currentFile = null;
-
-    // Trigger file selection
-    dropZone.addEventListener('click', () => fileInput.click());
-
-    // Drag and drop handlers
-    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('active'); });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('active'));
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('active');
-        if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-    });
-
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length) handleFile(e.target.files[0]);
-    });
-
-    function handleFile(file) {
-        currentFile = file;
-        controls.classList.remove('hidden');
-        document.getElementById('drop-text').innerText = "Fil: " + file.name;
-        document.getElementById('file-info').classList.remove('hidden');
-
-        // Autofyld dato baseret på filens metadata
-        const modDate = new Date(file.lastModified);
-        const yyyy = modDate.getFullYear();
-        const mm = String(modDate.getMonth() + 1).padStart(2, '0');
-        const dd = String(modDate.getDate()).padStart(2, '0');
-        dateInput.value = `${yyyy}-${mm}-${dd}`;
-
-        updatePreview();
-    }
-
-    function sanitize(text) {
-        return text.replace(/[\\/*?:"<>|]/g, '-').trim();
-    }
-
-    function updatePreview() {
-        if (!currentFile) return;
-
-        const rawDate = dateInput.value; // Format: YYYY-MM-DD
-        let formattedDate = rawDate;
-        
-        if (rawDate) {
-            const [y, m, d] = rawDate.split('-');
-            formattedDate = `${d}-${m}-${y}`; // Dansk format: DD-MM-YYYY
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
+            filter: brightness(1.1);
         }
 
-        const category = catInput.value;
-        const subject = sanitize(subInput.value);
-        const detail = sanitize(detInput.value);
-        const ext = currentFile.name.substring(currentFile.name.lastIndexOf('.'));
+        .btn-download:disabled {
+            background: #334155;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.5;
+        }
 
-        const parts = [formattedDate, category];
-        if (subject) parts.push(subject);
-        if (detail) parts.push(detail);
+        #file-info {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
 
-        const newName = parts.join(' - ') + ext;
-        previewText.innerText = newName;
-    }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
 
-    [dateInput, catInput, subInput, detInput].forEach(el => {
-        el.addEventListener('input', updatePreview);
-    });
+<body>
 
-    downloadBtn.addEventListener('click', () => {
-        if (!currentFile) return;
+    <div class="container">
+        <div class="header">
+            <h1>FileMaster Pro</h1>
+            <p>Lokal filhåndtering</p>
+            <span class="privacy-badge">🔒 100% Privat - Filer sendes ALDRIG til internettet</span>
+        </div>
 
-        const newName = previewText.innerText;
-        const url = URL.createObjectURL(currentFile);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = newName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
-</script>
+        <div class="upload-zone" id="drop-zone">
+            <div id="drop-text">Træk din fil herover eller klik for at vælge</div>
+            <div id="file-info" class="hidden">✓ Fil valgt</div>
+            <input type="file" id="file-input" class="hidden">
+        </div>
+
+        <div id="controls" class="hidden">
+            <div class="form-grid">
+                <div class="field">
+                    <label>Dato (YYYYMMDD)</label>
+                    <input type="date" id="date-input">
+                </div>
+                <div class="field">
+                    <label>Projekt (fx P123)</label>
+                    <input type="text" id="project-input" placeholder="P123">
+                </div>
+                <div class="field">
+                    <label>Afsender (fx NNE)</label>
+                    <input type="text" id="sender-input" placeholder="NNE">
+                </div>
+                <div class="field">
+                    <label>Dokumenttype (Type)</label>
+                    <select id="type-input">
+                        <option value="">Vælg type...</option>
+                        <option value="MAIL">MAIL</option>
+                        <option value="PID">PID</option>
+                        <option value="MEMO">MEMO</option>
+                        <option value="KONTRAKT">KONTRAKT</option>
+                        <option value="DESIGN">DESIGN</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="VENT">VENT</option>
+                        <option value="SCOPE">SCOPE</option>
+                        <option value="KORRESPONDANCE">KORRESPONDANCE</option>
+                    </select>
+                </div>
+                <div class="field" style="grid-column: span 2;">
+                    <label>Beskrivelse (Fri tekst)</label>
+                    <input type="text" id="description-input" placeholder="fx Update på SAT">
+                </div>
+            </div>
+
+            <div class="preview-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div class="preview-label" style="margin-bottom: 0;">Nyt filnavn</div>
+                    <div id="char-counter" style="font-size: 0.75rem; font-weight: 600; color: var(--text-dim);">0 / 200
+                    </div>
+                </div>
+                <div class="preview-text" id="preview-text">-</div>
+                <div id="warning-text" style="color: #ef4444; font-size: 0.8rem; margin-top: 8px; font-weight: 600;"
+                    class="hidden">⚠️ Filnavnet er for langt (maks 200 tegn)</div>
+            </div>
+
+            <button class="btn-download" id="download-btn" disabled>Udfyld alle felter for at downloade</button>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const controls = document.getElementById('controls');
+        const previewText = document.getElementById('preview-text');
+        const downloadBtn = document.getElementById('download-btn');
+
+        const dateInput = document.getElementById('date-input');
+        const projectInput = document.getElementById('project-input');
+        const senderInput = document.getElementById('sender-input');
+        const typeInput = document.getElementById('type-input');
+        const descInput = document.getElementById('description-input');
+        const charCounter = document.getElementById('char-counter');
+        const warningText = document.getElementById('warning-text');
+
+        let currentFile = null;
+
+        // Trigger file selection
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag and drop handlers
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('active'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('active'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('active');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) handleFile(e.target.files[0]);
+        });
+
+        function handleFile(file) {
+            currentFile = file;
+            controls.classList.remove('hidden');
+            document.getElementById('drop-text').innerText = "Fil: " + file.name;
+            document.getElementById('file-info').classList.remove('hidden');
+
+            // Autofyld dato baseret på filens metadata
+            const modDate = new Date(file.lastModified);
+            const yyyy = modDate.getFullYear();
+            const mm = String(modDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(modDate.getDate()).padStart(2, '0');
+            dateInput.value = `${yyyy}-${mm}-${dd}`;
+
+            updatePreview();
+        }
+
+        function sanitize(text, isDescription = false) {
+            if (!text) return "";
+
+            let sanitized = text
+                .replace(/&/g, 'og') // Erstat & med og
+                .replace(/[.,!?@#$%*()]/g, '') // Fjern specialtegn: . , ! ? @ # $ % * ( )
+                .trim();
+
+            if (isDescription) {
+                sanitized = sanitized.replace(/\s+/g, '_'); // Erstat mellemrum med understreg i beskrivelse
+            } else {
+                sanitized = sanitized.replace(/\s+/g, '-'); // Erstat mellemrum med bindestreg i andre felter
+            }
+
+            return sanitized;
+        }
+
+        function updatePreview() {
+            if (!currentFile) return;
+
+            const rawDate = dateInput.value; // Format: YYYY-MM-DD
+            let formattedDate = "";
+            if (rawDate) {
+                formattedDate = rawDate.replace(/-/g, ''); // Format: YYYYMMDD
+            }
+
+            const project = sanitize(projectInput.value);
+            const sender = sanitize(senderInput.value);
+            const type = typeInput.value;
+            const description = sanitize(descInput.value, true);
+            const ext = currentFile.name.substring(currentFile.name.lastIndexOf('.'));
+
+            // Validering: Tjek om alle felter er udfyldt
+            const allFilled = formattedDate && project && sender && type && description;
+
+            const parts = [formattedDate, project, sender, type, description];
+            const newName = parts.join('-') + ext;
+
+            previewText.innerText = allFilled ? newName : "Udfyld alle felter for at se preview";
+
+            // Character counter og limit
+            const charCount = newName.length;
+            charCounter.innerText = `${charCount} / 200`;
+
+            const isTooLong = charCount > 200;
+
+            if (isTooLong) {
+                charCounter.style.color = "#ef4444";
+                warningText.classList.remove('hidden');
+            } else {
+                charCounter.style.color = "var(--text-dim)";
+                warningText.classList.add('hidden');
+            }
+
+            // Enable/disable download button
+            if (allFilled && !isTooLong) {
+                downloadBtn.disabled = false;
+                downloadBtn.innerText = "Download omdøbt fil";
+            } else {
+                downloadBtn.disabled = true;
+                if (isTooLong) {
+                    downloadBtn.innerText = "Filnavn for langt";
+                } else {
+                    downloadBtn.innerText = "Udfyld alle felter";
+                }
+            }
+        }
+
+        [dateInput, projectInput, senderInput, typeInput, descInput].forEach(el => {
+            el.addEventListener('input', updatePreview);
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            if (!currentFile || downloadBtn.disabled) return;
+
+            const newName = previewText.innerText;
+            const url = URL.createObjectURL(currentFile);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = newName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
 
 </body>
+
 </html>
