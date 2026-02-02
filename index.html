@@ -227,13 +227,21 @@
                         <option value="MAIL">MAIL</option>
                         <option value="PID">PID</option>
                         <option value="MEMO">MEMO</option>
+                        <option value="CAN">CAN</option>
+                        <option value="F/M">F/M</option>
+                        <option value="TILSYNSNOTAT">TILSYNSNOTAT</option>
                         <option value="KONTRAKT">KONTRAKT</option>
                         <option value="DESIGN">DESIGN</option>
                         <option value="ADMIN">ADMIN</option>
                         <option value="VENT">VENT</option>
                         <option value="SCOPE">SCOPE</option>
                         <option value="KORRESPONDANCE">KORRESPONDANCE</option>
+                        <option value="OTHER">Anden...</option>
                     </select>
+                </div>
+                <div class="field hidden" id="other-type-container">
+                    <label>Angiv anden type</label>
+                    <input type="text" id="other-type-input" placeholder="fx RAPPORT">
                 </div>
                 <div class="field" style="grid-column: span 2;">
                     <label>Beskrivelse (Fri tekst)</label>
@@ -267,6 +275,8 @@
         const projectInput = document.getElementById('project-input');
         const senderInput = document.getElementById('sender-input');
         const typeInput = document.getElementById('type-input');
+        const otherTypeContainer = document.getElementById('other-type-container');
+        const otherTypeInput = document.getElementById('other-type-input');
         const descInput = document.getElementById('description-input');
         const charCounter = document.getElementById('char-counter');
         const warningText = document.getElementById('warning-text');
@@ -333,7 +343,16 @@
 
             const project = sanitize(projectInput.value);
             const sender = sanitize(senderInput.value);
-            const type = typeInput.value;
+
+            // Håndtering af "Anden..." type
+            let type = typeInput.value;
+            if (type === "OTHER") {
+                otherTypeContainer.classList.remove('hidden');
+                type = sanitize(otherTypeInput.value);
+            } else {
+                otherTypeContainer.classList.add('hidden');
+            }
+
             const description = sanitize(descInput.value, true);
             const ext = currentFile.name.substring(currentFile.name.lastIndexOf('.'));
 
@@ -373,7 +392,7 @@
             }
         }
 
-        [dateInput, projectInput, senderInput, typeInput, descInput].forEach(el => {
+        [dateInput, projectInput, senderInput, typeInput, otherTypeInput, descInput].forEach(el => {
             el.addEventListener('input', updatePreview);
         });
 
